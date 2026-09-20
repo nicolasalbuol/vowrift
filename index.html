@@ -1,0 +1,305 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Vowrift: wiki de classes, subclasses, raças, boons, eventos e conquistas.">
+<title>Vowrift | Atlas dos Errantes</title>
+<style>
+:root{color-scheme:dark;--bg:#080e19;--panel:#111d2e;--line:#283749;--gold:#f7c878;--muted:#a8b6c8;--ink:#f3f6fd}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 78% -10%,#273755 0,transparent 42%),var(--bg);color:var(--ink);font:16px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:var(--gold)}
+.shell{max-width:1350px;margin:auto;display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+aside{border-right:1px solid var(--line);padding:28px 17px;background:#0a1321}
+.brand{font-weight:900;letter-spacing:.12em;font-size:24px;color:var(--gold)}
+.brand small{display:block;font-size:10px;letter-spacing:.23em;color:var(--muted)}
+.aside-label{color:var(--muted);font-size:11px;letter-spacing:.18em;margin:42px 8px 13px}
+.nav{display:flex;flex-direction:column;gap:6px}
+.nav button{background:transparent;border:1px solid transparent;color:var(--muted);padding:11px 13px;text-align:left;border-radius:10px;width:100%}
+.nav button:hover,.nav button.active{background:#1e3043;color:var(--gold);border-color:#39516a}
+main{min-width:0;padding:24px clamp(18px,5vw,66px) 65px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:32px}
+.eyebrow{font-size:11px;letter-spacing:.17em;color:var(--gold)}
+.search{width:min(420px,100%);background:#111d2e;color:white;border:1px solid #344357;border-radius:10px;padding:12px 14px;outline-offset:3px}
+.hero{position:relative;overflow:hidden;background:linear-gradient(125deg,#253654,#122033 55%,#192a39);border:1px solid #4a5061;border-radius:19px;padding:clamp(25px,5vw,55px);box-shadow:0 22px 52px #0004}
+.hero:after{content:'✦';position:absolute;right:7%;top:0;font-size:240px;color:#e5ad6520;transform:rotate(-13deg);pointer-events:none}
+h1{font:700 clamp(32px,5vw,56px)/1.05 Georgia,serif;letter-spacing:-.03em;margin:13px 0 12px;max-width:650px}
+.hero p{max-width:620px;color:#c9d7e5}
+.pill{display:inline-block;color:var(--gold);border:1px solid #84704f;border-radius:25px;padding:5px 11px;font-size:11px;letter-spacing:.1em}
+.stats{display:flex;gap:23px;flex-wrap:wrap;margin-top:24px;color:#d3ddeb;font-size:13px}
+.stats b{font-size:18px;color:var(--gold)}
+.heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin:38px 0 18px}
+.heading h2{font-size:22px;margin:0}
+.heading span,.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{min-height:187px;text-align:left;color:var(--ink);background:linear-gradient(155deg,#192638,#0e1928);border:1px solid var(--line);border-radius:14px;padding:19px;display:flex;flex-direction:column;align-items:flex-start;gap:7px;transition:transform .16s,border-color .16s}
+.card:hover,.card:focus-visible{border-color:var(--gold);transform:translateY(-2px)}
+.crest{height:42px;width:42px;display:grid;place-items:center;background:#354353;border:1px solid #7b6548;border-radius:12px;color:var(--gold);font-size:22px}
+.kicker{color:var(--gold);font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-top:7px}
+.card b{font-size:19px;line-height:1.2}
+.card small{color:var(--muted);line-height:1.5}
+#detail{display:none;position:fixed;inset:0;z-index:3;background:#000b;align-items:center;justify-content:center;padding:15px}
+#detail.visible{display:flex}
+.dialog{position:relative;overflow:auto;max-height:calc(100vh - 30px);max-width:590px;width:100%;background:#101e30;border:1px solid #77704e;border-radius:19px;padding:34px;box-shadow:0 30px 90px #0009}
+.dialog h2{font:700 33px Georgia,serif;margin:14px 0}
+.dialog h3{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:.1em;margin:24px 0 6px}
+.dialog p{color:#d6e1ea}
+.close{float:right;color:white;background:#283a50;border:1px solid #52647a;border-radius:9px;padding:7px 13px}
+.footer{margin-top:40px;color:#91a4b8;font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+@media(max-width:760px){
+.shell{display:block}
+aside{border-right:0;border-bottom:1px solid var(--line);padding:14px 16px}
+.aside-label{display:none}
+.nav{flex-direction:row;overflow:auto;margin-top:12px;padding-bottom:4px}
+.nav button{white-space:nowrap;width:auto;padding:8px}
+.brand{font-size:20px}
+main{padding-top:19px}
+.top{flex-wrap:wrap}
+.search{width:100%}
+.hero:after{right:-60px;top:40px;font-size:170px}
+}
+@media(prefers-reduced-motion:reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside>
+<div class="brand">VOWRIFT<small>ATLAS DOS ERRANTES</small></div>
+<div class="aside-label">ENCICLOPÉDIA</div>
+<nav class="nav" id="nav" aria-label="Categorias"></nav>
+</aside>
+<main>
+<header class="top">
+<div class="eyebrow">ENCICLOPÉDIA DO JOGO · WIKI DE DESIGN</div>
+<input class="search" id="search" type="search" aria-label="Pesquisar" placeholder="Pesquisar classe, boon, evento...">
+</header>
+<section class="hero">
+<span class="pill">✧ UNIVERSO VOWRIFT</span>
+<h1>A aventura começa com uma escolha.</h1>
+<p>Explore classes, especializações, raças, Boons, treinadores, encontros e conquistas da campanha cooperativa. Conteúdo de planejamento, sujeito a alterações no jogo.</p>
+<div class="stats">
+<span><b>12</b> classes</span>
+<span><b>36</b> subclasses</span>
+<span><b>9</b> raças</span>
+<span><b>150</b> verbetes</span>
+</div>
+</section>
+<div class="heading">
+<h2 id="title">Explore o atlas</h2>
+<span id="count"></span>
+</div>
+<section class="grid" id="grid" aria-live="polite"></section>
+<footer class="footer">VOWRIFT · Wiki independente. Sem login, cookies, anúncios ou requisições externas. Nomes, poderes e desbloqueios em planejamento podem mudar.</footer>
+</main>
+</div>
+<div id="detail" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+<article class="dialog">
+<button id="close" class="close" type="button">Fechar ✕</button>
+<span id="detail-kind" class="pill"></span>
+<h2 id="detail-title"></h2>
+<p id="detail-desc"></p>
+<h3>Como desbloquear / encontrar</h3>
+<p id="detail-unlock"></p>
+<h3>Observações</h3>
+<p id="detail-note"></p>
+</article>
+</div>
+<script>
+'use strict';
+
+const names=(s)=>s.split('|').map(t=>t.trim());
+
+const classes=names('Bárbaro|Bardo|Bruxo|Clérigo|Druida|Feiticeiro|Guerreiro|Ladino|Mago|Monge|Paladino|Patrulheiro');
+
+const subs=names('Berserker|Totem Guerreiro|Guardião Ancestral|Colégio do Conhecimento|Colégio do Valor|Colégio do Glamour|Pacto Infernal|Pacto Feérico|Pacto Abissal|Domínio da Vida|Domínio da Luz|Domínio da Guerra|Círculo da Terra|Círculo da Lua|Círculo dos Esporos|Linhagem Dracônica|Magia Selvagem|Magia das Sombras|Campeão|Mestre de Batalha|Cavaleiro Arcano|Ladrão|Assassino|Trapaceiro Arcano|Escola da Evocação|Escola da Abjuração|Escola da Adivinhação|Caminho da Mão Aberta|Caminho das Sombras|Caminho dos Quatro Elementos|Juramento da Devoção|Juramento dos Anciões|Juramento da Vingança|Caçador|Mestre das Feras|Andarilho das Trevas');
+
+const races=names('Humano|Elfo|Anão|Halfling|Gnomo|Meio-Elfo|Meio-Orc|Tiefling|Draconato');
+
+const boons=names('Sangue de Rocha|Fúria Compartilhada|Último Rugido|Refrão de Batalha|Aplauso de Ferro|Encore|Dívida do Pacto|Selo Faminto|Voz do Vazio|Vigília Radiante|Bênção Partilhada|Chama da Aurora|Raiz Persistente|Pele de Carvalho|Esporos Errantes|Eco Arcano|Sopro Instável|Coração de Mana|Postura Imóvel|Ritmo de Aço|Comando de Avanço|Passo Sem Som|Ponto Fraco|Bolsa Escondida|Memória de Runas|Selo Reverso|Fórmula Compartilhada|Fluxo Ininterrupto|Guarda Serena|Eco dos Passos|Pacto de Escudos|Luz Persistente|Voto de Aço|Olhos da Trilha|Disparo Marcado|Companhia Selvagem');
+
+const places=names('Ruínas do Marco Zero|Mercador da Névoa|Fogueira dos Errantes|Emboscada na Ponte|Baú de Correntes|Ferreiro sem Rosto|Sentinela do Portão|Clareira dos Sussurros|Ninho de Esporos|Caçador de Relíquias|Santuário das Raízes|Lago do Reflexo|Lobo da Coroa Quebrada|Guardião do Bosque|Biblioteca Sepultada|Altar do Juramento|Câmara do Eco|Portal dos Ossos|Obelisco da Exaustão|Tesouro do Último Rei|Trono do Dragão');
+
+const achievements=names('Início da Jornada|Primeiro Acampamento|Mãos à Obra|Presa Desarmada|Sorte na Vila|Mentor Conhecido|Aprendiz de Elite|Amigos do Bosque|Visão do Lago|Rugido de Sobrevivente|Eco do Passado|Vontade Indomável|Asas Derrotadas|Companheiros de Armas|Coleção de Juramentos|Caminho até o Fim');
+
+const ruleNames=names('Sistema de Energia|Combate por turnos|Rota da campanha|Votação em eventos|Subclasses e treinadores|Ressurreição e Exaustão|Cubos de Obsidiana|Vitória e resumo');
+
+const ruleText=[
+'Energia começa em 0 a cada combate, aumenta em 1 por turno e tem limite de 5. Ataques básicos custam 0; habilidades custam de 0 a 5. Energia não é preservada entre combates.',
+'Combate cooperativo por turnos, sem movimentação manual. Cada personagem realiza uma ação principal; ataque, habilidade, magia, defesa, item ou passar turno.',
+'A campanha passa pela Vila, Floresta e Dungeon. A Vila possui ondas 0–4; a Floresta, 0–8. A Dungeon culmina no encontro com o dragão.',
+'Eventos oferecem escolhas coletivas por votação. O jogo deve definir resultado de empate, ausência, desconexões, jogadores mortos e tempo limite.',
+'Cada classe tem três subclasses, obtidas em encontros rápidos com seu treinador. Apenas personagens da classe podem escolher suas subclasses; demais classes podem receber um bônus alternativo. Desbloqueios são permanentes, com uma subclasse ativa de cada vez.',
+'Exaustão é uma consequência planejada da morte. Valores exatos e condições de recuperação dependem do balanceamento final do jogo.',
+'Cubos de Obsidiana representam uma moeda de progressão permanente para compras e desbloqueios; custos finais dependem do balanceamento.',
+'Ao derrotar o chefe final, a campanha exibe a tela de vitória e o resumo individual de cada participante, incluindo sua contribuição ao grupo.'
+];
+
+const list=[];
+
+function add(cat,title,desc,unlock,note,icon){
+list.push({cat,title,desc,unlock,note,icon});
+}
+
+classes.forEach(c=>add(
+'Classes',c,
+'Classe jogável com papel próprio em combate cooperativo.',
+'Disponível na seleção de classe da versão-base (proposta).',
+'Três subclasses por classe; habilidades e números ainda sujeitos ao balanceamento.',
+'⚔'
+));
+
+subs.forEach((s,i)=>{
+const c=classes[Math.floor(i/3)];
+add(
+'Subclasses',s,
+'Especialização de '+c+'; prevista para expandir habilidades e estilos de jogo.',
+'Encontre o Treinador: '+c+'. Somente personagens da classe '+c+' podem selecionar esta subclasse.',
+'Depois do desbloqueio permanente, ative-a pelo menu MELHORIA fora do combate. Uma subclasse ativa por vez.',
+'✦'
+);
+});
+
+races.forEach(r=>add(
+'Raças',r,
+'Raça jogável com um traço exclusivo e uma forma própria de desbloqueio.',
+'Conclua a conquista específica da raça e compre-a com Cubos de Obsidiana (objetivo de design).',
+'Condição da conquista e preço ainda não definidos na versão jogável.',
+'♜'
+));
+
+boons.forEach((b,i)=>add(
+'Boons',b,
+'Bênção voltada a combinações entre jogadores; afinidade inicial com '+classes[Math.floor(i/3)]+'.',
+'Desbloqueio por conquistas e tarefas do jogo; requisito exato ainda será definido.',
+'Boons não ficam presos à classe de afinidade: outras classes podem usá-los em combinações.',
+'◇'
+));
+
+classes.forEach(c=>add(
+'Encontros','Treinador: '+c,
+'Encontro de treinador exclusivo para desbloquear as três subclasses de '+c+'.',
+'Localização e condição de aparecimento serão definidas para a campanha.',
+'Outras classes podem receber um bônus temporário coerente com o treinador.',
+'🏛'
+));
+
+places.forEach((p,i)=>{
+const region=i<7?'Vila':i<14?'Floresta':'Dungeon';
+add(
+'Encontros',p,
+'Encontro da região '+region+' com escolhas de grupo, desafios ou recompensas.',
+'Explore a região '+region+' e escolha este encontro quando ele aparecer.',
+'Os efeitos, chances de ocorrência e recompensas deste encontro ainda são conceitos de design.',
+['🏚','🛒','🔥','🌉','🗝','⚒','🛡','🌲','🍄','🏹','🌳','💧','🐺','🌿','📚','⛩','🔔','💀','🗿','👑','🐉'][i]
+);
+});
+
+achievements.forEach(a=>add(
+'Conquistas',a,
+'Marco de progresso da expedição e dos desbloqueios permanentes.',
+'Complete o objetivo ligado a esta conquista quando ele estiver implementado.',
+'A condição numérica e a recompensa ainda dependem da versão final do jogo.',
+'🏆'
+));
+
+ruleNames.forEach((r,i)=>add(
+'Regras',r,ruleText[i],
+'Consulte este guia durante a preparação de personagens e expedições.',
+'Esta wiki descreve o plano de design, não sincroniza dados ao vivo com o Roblox.',
+'☷'
+));
+
+const cats=['Tudo','Classes','Subclasses','Raças','Boons','Encontros','Conquistas','Regras'];
+let current='Tudo';
+
+const nav=document.getElementById('nav');
+const grid=document.getElementById('grid');
+const search=document.getElementById('search');
+
+const fold=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('pt-BR');
+
+function render(){
+nav.replaceChildren();
+cats.forEach(c=>{
+const b=document.createElement('button');
+b.textContent=c;
+b.className=c===current?'active':'';
+b.setAttribute('aria-pressed',c===current?'true':'false');
+b.addEventListener('click',()=>{current=c;render();});
+nav.append(b);
+});
+
+const q=fold(search.value.trim());
+const result=list.filter(x=>(current==='Tudo'||x.cat===current)&&fold([x.title,x.cat,x.desc,x.unlock].join(' ')).includes(q));
+
+document.getElementById('title').textContent=q?'Resultados da busca':current==='Tudo'?'Explore o atlas':current;
+document.getElementById('count').textContent=result.length+' verbete(s)';
+grid.replaceChildren();
+
+if(!result.length){
+const p=document.createElement('p');
+p.textContent='Nenhum resultado encontrado. Tente outra palavra.';
+grid.append(p);
+return;
+}
+
+result.forEach(x=>{
+const b=document.createElement('button');
+b.type='button';
+b.className='card';
+
+const ico=document.createElement('span');
+ico.className='crest';
+ico.textContent=x.icon;
+
+const k=document.createElement('span');
+k.className='kicker';
+k.textContent=x.cat;
+
+const title=document.createElement('b');
+title.textContent=x.title;
+
+const d=document.createElement('small');
+d.textContent=x.desc;
+
+b.append(ico,k,title,d);
+b.addEventListener('click',()=>show(x));
+grid.append(b);
+});
+}
+
+const overlay=document.getElementById('detail');
+
+function show(x){
+document.getElementById('detail-kind').textContent=x.cat;
+document.getElementById('detail-title').textContent=x.title;
+document.getElementById('detail-desc').textContent=x.desc;
+document.getElementById('detail-unlock').textContent=x.unlock;
+document.getElementById('detail-note').textContent=x.note;
+overlay.classList.add('visible');
+document.getElementById('close').focus();
+}
+
+function hide(){
+overlay.classList.remove('visible');
+}
+
+document.getElementById('close').addEventListener('click',hide);
+overlay.addEventListener('click',e=>{
+if(e.target===overlay)hide();
+});
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape')hide();
+});
+
+search.addEventListener('input',render);
+render();
+</script>
+</body>
+</html>
